@@ -16,7 +16,15 @@ function showBooks() {
     const li = document.createElement("li");
     li.style.listStyle = "none";
     li.innerHTML = `${book.bookTitle} <br> ${book.bookAuthor} <br>`;
-
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("deleteButton");
+    deleteButton.setAttribute("data-book-index", i);
+    deleteButton.addEventListener("click", () => {
+      books.splice(i, 1);
+      localStorage.setItem('books', JSON.stringify(books));
+      showBooks();
+    });
     li.appendChild(deleteButton);
     booksCont.appendChild(li);
   });
