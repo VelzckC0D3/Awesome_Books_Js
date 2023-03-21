@@ -10,16 +10,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
-    <script src="scripts/script.js"></script>
     <title>Velzck's Awesome Book</title>
 </head>
 
 <body>
     <main class="main columnCenter">
         <div class="awesomeBooks columnCenter">
-            <h1>Awesome Books</h1>
+            <h1>Velzck's Awesome Book</h1>
+            <ul id="books">
+                
+            </ul>
+            <form id="createBook" class="form columnCenter">
+                <h2>create a book</h2>
+                <input class="input" type="text" id="title" placeholder="title" required /><br /><br />
+                <input class="input" type="text" id="author" placeholder="author" required /><br /><br />
+                <button type="button" id="addButton">Add New Book</button>
+              </form>              
         </div>
     </main>
+    <script src="scripts/scripts.js"></script>
 </body>
 
 </html>
