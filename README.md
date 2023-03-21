@@ -189,13 +189,9 @@ I would like to thanks my Microverse Team for helping me to get this done.
 
 ## ❓ FAQ<a name="faq"></a>
 
-- **[Which languages did you use in this project?]**
-
-  - [HTML, CSS and JavaScript applying DOM]
-
 - **[What was the most difficult thin to achieve here?]**
 
-  - [The responsiveness and adapative design, also the JavaScript functions that I've implemented]
+  - [The implementation of the function itsefl was quite a challenge for me since I'm not familiarized with it]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
