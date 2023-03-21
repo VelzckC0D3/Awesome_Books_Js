@@ -2,25 +2,23 @@
 let books = [];
 
 // Step 2: Select the elements where we're going to be working
-const title = document.querySelector("#title");
-const author = document.querySelector("#author");
-const addButton = document.querySelector("#addButton");
-const booksCont = document.querySelector("#books");
-
-console.log(title, author, addButton, booksCont);
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const addButton = document.querySelector('#addButton');
+const booksCont = document.querySelector('#books');
 
 // Step 3: Display the books
 function showBooks() {
   booksCont.innerHTML = '';
   books.forEach((book, i) => {
-    const li = document.createElement("li");
-    li.style.listStyle = "none";
+    const li = document.createElement('li');
+    li.style.listStyle = 'none';
     li.innerHTML = `${book.bookTitle} <br> ${book.bookAuthor} <br>`;
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.classList.add("deleteButton");
-    deleteButton.setAttribute("data-book-index", i);
-    deleteButton.addEventListener("click", () => {
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('deleteButton');
+    deleteButton.setAttribute('data-book-index', i);
+    deleteButton.addEventListener('click', () => {
       books.splice(i, 1);
       localStorage.setItem('books', JSON.stringify(books));
       showBooks();
@@ -28,7 +26,7 @@ function showBooks() {
     li.appendChild(deleteButton);
     booksCont.appendChild(li);
   });
-};
+}
 
 // Step 4: local storage
 if (localStorage.getItem('books')) {
@@ -51,7 +49,5 @@ addButton.addEventListener('click', () => {
     author.value = '';
 
     showBooks();
-  } else {
-    console.log('Please enter a title and author');
   }
 });
