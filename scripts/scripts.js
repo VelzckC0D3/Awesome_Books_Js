@@ -20,9 +20,10 @@ class Library {
     this.books.forEach((book, i) => {
       const li = document.createElement('li');
       li.style.listStyle = 'none';
-      li.innerHTML = `${book.title} <br> ${book.author} <br>`;
+      li.classList.add('booksLi');
+      li.innerHTML = `"${book.title}" by ${book.author}`;
       const deleteButton = document.createElement('button');
-      deleteButton.textContent = 'Delete';
+      deleteButton.textContent = 'Remove';
       deleteButton.classList.add('deleteButton');
       deleteButton.setAttribute('data-book-index', i);
       deleteButton.addEventListener('click', () => {
