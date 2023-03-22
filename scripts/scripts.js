@@ -26,9 +26,7 @@ class Library {
       deleteButton.classList.add('deleteButton');
       deleteButton.setAttribute('data-book-index', i);
       deleteButton.addEventListener('click', () => {
-        this.books.splice(i, 1);
-        localStorage.setItem('books', JSON.stringify(this.books));
-        this.showBooks();
+        this.removeBook(i);
       });
       li.appendChild(deleteButton);
       booksCont.appendChild(li);
@@ -52,6 +50,13 @@ class Library {
     localStorage.setItem('books', JSON.stringify(this.books));
     this.showBooks();
   }
+
+  // Step 6: Remove a book
+  removeBook(index) {
+    this.books.splice(index, 1);
+    localStorage.setItem('books', JSON.stringify(this.books));
+    this.showBooks();
+  }
 }
 
 // Create a new Library object
@@ -63,7 +68,7 @@ library.loadBooks();
 // Call showBooks() once to display any saved books when the page initially loads
 library.showBooks();
 
-// Step 6: Add button
+// Step 7: Add button
 const addButton = document.querySelector('#addButton');
 addButton.addEventListener('click', () => {
   const title = document.querySelector('#title').value;
