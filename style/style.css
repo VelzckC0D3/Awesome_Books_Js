@@ -3,3 +3,41 @@
 *::after {
   font-family: "Montserrat", sans-serif;
 }
+
+.columnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#books {
+  padding: 0.5rem 1rem;
+  margin: 0;
+  border: 2px solid black;
+}
+
+.booksLi {
+  display: flex;
+  width: 20rem;
+  justify-content: space-between;
+}
+
+.booksLi:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.096);
+}
+
+#createBook {
+  gap: 0;
+}
+
+.input {
+  margin: 0;
+  padding: 0;
+}
+
+#addButton {
+  margin: 0 1rem;
+  justify-self: flex-end !important;
+  align-self: flex-end;
+}

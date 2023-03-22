@@ -1,53 +1,83 @@
-// Step 1: Create an empty array
-let books = [];
+// Step 1: Create a Book class
+// eslint-disable-next-line max-classes-per-file
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
+}
 
-// Step 2: Select the elements where we're going to be working
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-const addButton = document.querySelector('#addButton');
-const booksCont = document.querySelector('#books');
+// Step 2: Create a Library class
+class Library {
+  constructor() {
+    this.books = [];
+  }
 
-// Step 3: Display the books
-function showBooks() {
-  booksCont.innerHTML = '';
-  books.forEach((book, i) => {
-    const li = document.createElement('li');
-    li.style.listStyle = 'none';
-    li.innerHTML = `${book.bookTitle} <br> ${book.bookAuthor} <br>`;
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.classList.add('deleteButton');
-    deleteButton.setAttribute('data-book-index', i);
-    deleteButton.addEventListener('click', () => {
-      books.splice(i, 1);
-      localStorage.setItem('books', JSON.stringify(books));
-      showBooks();
+  // Step 3: Display the books
+  showBooks() {
+    const booksCont = document.querySelector('#books');
+    booksCont.innerHTML = '';
+    this.books.forEach((book, i) => {
+      const li = document.createElement('li');
+      li.style.listStyle = 'none';
+      li.classList.add('booksLi');
+      li.innerHTML = `"${book.title}" by ${book.author}`;
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Remove';
+      deleteButton.classList.add('deleteButton');
+      deleteButton.setAttribute('data-book-index', i);
+      deleteButton.addEventListener('click', () => {
+        this.removeBook(i);
+      });
+      li.appendChild(deleteButton);
+      booksCont.appendChild(li);
     });
-    li.appendChild(deleteButton);
-    booksCont.appendChild(li);
-  });
+  }
+
+  // Step 4: Load saved books from local storage
+  loadBooks() {
+    if (localStorage.getItem('books')) {
+      const savedBooks = JSON.parse(localStorage.getItem('books'));
+      savedBooks.forEach((book) => {
+        this.books.push(new Book(book.title, book.author));
+      });
+    }
+  }
+
+  // Step 5: Add a new book
+  addBook(title, author) {
+    const newBook = new Book(title, author);
+    this.books.push(newBook);
+    localStorage.setItem('books', JSON.stringify(this.books));
+    this.showBooks();
+  }
+
+  // Step 6: Remove a book
+  removeBook(index) {
+    this.books.splice(index, 1);
+    localStorage.setItem('books', JSON.stringify(this.books));
+    this.showBooks();
+  }
 }
 
-// Step 4: local storage
-if (localStorage.getItem('books')) {
-  books = JSON.parse(localStorage.getItem('books'));
-}
+// Create a new Library object
+const library = new Library();
+
+// Call loadBooks() once to load any saved books from local storage
+library.loadBooks();
 
 // Call showBooks() once to display any saved books when the page initially loads
-showBooks();
+library.showBooks();
 
-// Step 5: Add button
+// Step 7: Add button
+const addButton = document.querySelector('#addButton');
 addButton.addEventListener('click', () => {
-  const bookTitle = title.value;
-  const bookAuthor = author.value;
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
 
-  if (bookTitle && bookAuthor) {
-    books.push({ bookTitle, bookAuthor });
-    localStorage.setItem('books', JSON.stringify(books));
-
-    title.value = '';
-    author.value = '';
-
-    showBooks();
+  if (title && author) {
+    library.addBook(title, author);
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
   }
 });
