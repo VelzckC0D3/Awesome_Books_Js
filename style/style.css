@@ -19,8 +19,12 @@
 
 .booksLi {
   display: flex;
-  width: 50vw;
+  width: 20rem;
   justify-content: space-between;
+}
+
+.booksLi:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.096);
 }
 
 #createBook {
