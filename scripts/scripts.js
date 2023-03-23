@@ -81,3 +81,19 @@ addButton.addEventListener('click', () => {
     document.querySelector('#author').value = '';
   }
 });
+
+// extra 1: Date and hour
+
+const dt = new Date();
+const month = dt.toLocaleString('default', { month: 'long' });
+const day = dt.getDate();
+const year = dt.getFullYear();
+let hour = dt.getHours();
+const ampm = hour >= 12 ? 'pm' : 'am';
+hour = hour % 12;
+hour = hour ? hour : 12;
+const minutes = dt.getMinutes().toString().padStart(2, '0');
+const timeString = hour + ':' + minutes + ' ' + ampm;
+const formattedDate = month + ' ' + day + ' ' + year + ', ' + timeString;
+
+document.querySelector('#date-time').innerHTML = formattedDate;
