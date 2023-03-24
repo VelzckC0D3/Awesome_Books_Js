@@ -37,7 +37,6 @@
 .awesomeBooksCont {
   width: 25rem;
   padding: 1rem;
-  border: 3px solid black;
   height: auto;
   justify-content: space-evenly;
 }
