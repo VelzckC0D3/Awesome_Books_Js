@@ -1,19 +1,22 @@
-// Step 1: Create a Book class
-// eslint-disable-next-line max-classes-per-file
-class Book {
-  constructor(title, author) {
-    this.title = title;
-    this.author = author;
-  }
-}
-
-// Step 2: Create a Library class
 class Library {
   constructor() {
     this.books = [];
+    this.loadBooks();
+    this.showBooks();
+
+    const addButton = document.querySelector('#addButton');
+    addButton.addEventListener('click', () => {
+      const title = document.querySelector('#title').value;
+      const author = document.querySelector('#author').value;
+
+      if (title && author) {
+        this.addBook(title, author);
+        document.querySelector('#title').value = '';
+        document.querySelector('#author').value = '';
+      }
+    });
   }
 
-  // Step 3: Display the books
   showBooks() {
     const booksCont = document.querySelector('#books');
     booksCont.innerHTML = '';
@@ -34,25 +37,22 @@ class Library {
     });
   }
 
-  // Step 4: Load saved books from local storage
   loadBooks() {
     if (localStorage.getItem('books')) {
       const savedBooks = JSON.parse(localStorage.getItem('books'));
       savedBooks.forEach((book) => {
-        this.books.push(new Book(book.title, book.author));
+        this.books.push({ title: book.title, author: book.author });
       });
     }
   }
 
-  // Step 5: Add a new book
   addBook(title, author) {
-    const newBook = new Book(title, author);
+    const newBook = { title, author };
     this.books.push(newBook);
     localStorage.setItem('books', JSON.stringify(this.books));
     this.showBooks();
   }
 
-  // Step 6: Remove a book
   removeBook(index) {
     this.books.splice(index, 1);
     localStorage.setItem('books', JSON.stringify(this.books));
@@ -90,10 +90,40 @@ const day = dt.getDate();
 const year = dt.getFullYear();
 let hour = dt.getHours();
 const ampm = hour >= 12 ? 'pm' : 'am';
-hour = hour % 12;
-hour = hour ? hour : 12;
+hour %= 12;
+hour = hour || 12;
 const minutes = dt.getMinutes().toString().padStart(2, '0');
-const timeString = hour + ':' + minutes + ' ' + ampm;
-const formattedDate = month + ' ' + day + ' ' + year + ', ' + timeString;
+const timeString = `${hour}:${minutes} ${ampm}`;
+const formattedDate = `${month} ${day} ${year}, ${timeString}`;
 
 document.querySelector('#date-time').innerHTML = formattedDate;
+
+// Change page function
+// Buttons
+const listButton = document.querySelector('.list');
+const add = document.querySelector('.addButton');
+const contactButton = document.querySelector('.contact');
+
+// Containers
+const bookList = document.querySelector('.awesomeBooks');
+const createBook = document.querySelector('.form');
+const contact = document.querySelector('.contactCont');
+
+// Function
+listButton.addEventListener('click', () => {
+  bookList.classList.remove('switch');
+  createBook.classList.add('switch');
+  contact.classList.add('switch');
+});
+
+add.addEventListener('click', () => {
+  createBook.classList.remove('switch');
+  bookList.classList.add('switch');
+  contact.classList.add('switch');
+});
+
+contactButton.addEventListener('click', () => {
+  contact.classList.remove('switch');
+  bookList.classList.add('switch');
+  createBook.classList.add('switch');
+});
